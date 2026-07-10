@@ -53,10 +53,17 @@ function tts_portal_enqueue_assets() {
 	}
 
 	wp_enqueue_style(
+		'tts-portal-fonts',
+		'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap',
+		array(),
+		null
+	);
+
+	wp_enqueue_style(
 		'tts-portal',
 		get_stylesheet_uri(),
-		array(),
-		'1.0.4'
+		array( 'tts-portal-fonts' ),
+		'1.0.6'
 	);
 
 	wp_enqueue_script(
@@ -86,6 +93,24 @@ function tts_portal_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'tts_portal_enqueue_assets' );
+
+/**
+ * Preconnect to Google Fonts for faster loading.
+ */
+function tts_portal_font_preconnect( $urls, $relation_type ) {
+	if ( 'preconnect' !== $relation_type ) {
+		return $urls;
+	}
+	$urls[] = array(
+		'href' => 'https://fonts.googleapis.com',
+	);
+	$urls[] = array(
+		'href'        => 'https://fonts.gstatic.com',
+		'crossorigin' => 'anonymous',
+	);
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'tts_portal_font_preconnect', 10, 2 );
 
 /**
  * Capitalize the first letter of each word in a name.
@@ -202,21 +227,33 @@ add_action( 'wp_enqueue_scripts', 'tts_portal_admin_bar_logo_css' );
  */
 function tts_portal_login_enqueue() {
 	wp_enqueue_style(
+		'tts-portal-fonts',
+		'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap',
+		array(),
+		null
+	);
+
+	wp_enqueue_style(
 		'tts-portal-login',
 		get_template_directory_uri() . '/assets/login.css',
-		array(),
-		'1.0.6'
+		array( 'tts-portal-fonts' ),
+		'1.0.9'
 	);
 
 	wp_enqueue_script(
 		'tts-portal-login',
 		get_template_directory_uri() . '/assets/login.js',
 		array(),
-		'1.0.6',
+		'1.0.9',
 		true
 	);
 }
 add_action( 'login_enqueue_scripts', 'tts_portal_login_enqueue' );
+
+/**
+ * Hide the WP language switcher on wp-login.php.
+ */
+add_filter( 'login_display_language_dropdown', '__return_false' );
 
 function tts_portal_login_logo_url() {
 	return home_url( '/' );

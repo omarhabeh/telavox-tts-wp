@@ -3,17 +3,22 @@
 :root {
   --accent: #195E3D;
   --accent-dark: #144a31;
+  --btn: #2EC659;
+  --btn-hover: #28b34f;
+  --btn-text: #004438;
   --bg: #f5f6f5;
   --card: #ffffff;
   --text: #1a1d1b;
   --muted: #6b726e;
   --border: #e2e5e3;
   --error: #c0392b;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-title: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body.login {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg) !important;
   color: var(--text);
   display: flex !important;
@@ -80,6 +85,7 @@ body.login .tts-login-heading {
 }
 
 body.login .tts-login-heading h2 {
+  font-family: var(--font-title);
   font-size: 20px;
   font-weight: 600;
   color: var(--text);
@@ -184,17 +190,24 @@ body.login #login .submit .button-primary,
 body.login #login #wp-submit {
   float: none !important;
   width: auto;
-  display: inline-block;
-  background: var(--accent) !important;
-  color: #fff !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--btn) !important;
+  color: var(--btn-text) !important;
   border: none !important;
-  border-radius: 8px !important;
-  padding: 11px 18px !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
+  border-radius: 300px !important;
+  padding: 4px 32px !important;
+  font-family: var(--font-body) !important;
+  font-style: normal !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  letter-spacing: -0.18px !important;
+  text-align: center;
   cursor: pointer;
   height: auto !important;
-  line-height: 1.3 !important;
   text-shadow: none !important;
   box-shadow: none !important;
   margin: 10px 0 0 !important;
@@ -203,7 +216,7 @@ body.login #login #wp-submit {
 body.login #login .submit .button:hover,
 body.login #login .submit .button-primary:hover,
 body.login #login #wp-submit:hover {
-  background: var(--accent-dark) !important;
+  background: var(--btn-hover) !important;
 }
 
 body.login #login #nav,
@@ -261,7 +274,7 @@ body.login #login .privacy-policy-page-link a {
   font-size: 13px;
 }
 
-/* Hide language switcher clutter if present */
+/* Hide language switcher if present */
 body.login .language-switcher {
-  margin-top: 20px;
+  display: none !important;
 }

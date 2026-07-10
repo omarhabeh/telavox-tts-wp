@@ -14,12 +14,17 @@ Text Domain: tts-portal
 :root {
   --accent: #195E3D;
   --accent-dark: #144a31;
+  --btn: #2EC659;
+  --btn-hover: #28b34f;
+  --btn-text: #004438;
   --bg: #f5f6f5;
   --card: #ffffff;
   --text: #1a1d1b;
   --muted: #6b726e;
   --border: #e2e5e3;
   --error: #c0392b;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-title: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -28,7 +33,7 @@ Text Domain: tts-portal
 
 body.tts-portal {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -57,6 +62,12 @@ body.tts-portal {
   padding: 28px;
   width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tts-portal h1,
+.tts-portal h2,
+.tts-portal h3 {
+  font-family: var(--font-title);
 }
 
 .tts-portal h1 {
@@ -109,18 +120,27 @@ body.tts-portal {
 }
 
 .tts-portal button {
-  background: var(--accent);
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--btn);
+  color: var(--btn-text);
   border: none;
-  border-radius: 8px;
-  padding: 11px 18px;
-  font-size: 15px;
-  font-weight: 600;
+  border-radius: 300px;
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  text-align: center;
   cursor: pointer;
 }
 
 .tts-portal button:hover {
-  background: var(--accent-dark);
+  background: var(--btn-hover);
 }
 
 .tts-portal button:disabled {
@@ -130,7 +150,7 @@ body.tts-portal {
 
 .tts-portal button.secondary {
   background: #fff;
-  color: var(--text);
+  color: var(--btn-text);
   border: 1px solid var(--border);
 }
 
@@ -162,14 +182,20 @@ body.tts-portal {
 }
 
 .tts-portal .logout {
+  display: inline;
+  gap: 0;
+  font-family: var(--font-body);
   font-size: 13px;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: normal;
   background: none;
   border: none;
+  border-radius: 0;
   color: var(--muted);
   cursor: pointer;
   padding: 4px;
   text-decoration: none;
-  font-weight: 400;
 }
 
 .tts-portal .logout:hover {
@@ -203,12 +229,12 @@ body.tts-portal {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #fff;
+  border: 2px solid rgba(0, 68, 56, 0.25);
+  border-top-color: var(--btn-text);
   border-radius: 50%;
   animation: tts-spin 0.7s linear infinite;
   vertical-align: middle;
-  margin-right: 8px;
+  margin-right: 0;
 }
 
 @keyframes tts-spin {
@@ -218,15 +244,20 @@ body.tts-portal {
 }
 
 .tts-portal a.download {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   background: #fff;
-  color: var(--text);
+  color: var(--btn-text);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 11px 18px;
-  font-weight: 600;
-  font-size: 15px;
+  border-radius: 300px;
+  padding: 16px 32px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.18px;
 }
 
 .tts-portal a.download:hover {

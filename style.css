@@ -1,0 +1,234 @@
+/*
+Theme Name: Telavox TTS Portal
+Theme URI: https://telavox.se
+Author: Telavox
+Description: Internal text-to-speech portal powered by ElevenLabs. Requires WordPress login.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: Proprietary
+Text Domain: tts-portal
+*/
+
+:root {
+  --accent: #195E3D;
+  --accent-dark: #144a31;
+  --bg: #f5f6f5;
+  --card: #ffffff;
+  --text: #1a1d1b;
+  --muted: #6b726e;
+  --border: #e2e5e3;
+  --error: #c0392b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.tts-portal {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.tts-portal .tts-portal-wrap {
+  width: 100%;
+  max-width: 560px;
+}
+
+.tts-portal .tts-logo {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 0 auto 24px;
+}
+
+.tts-portal .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tts-portal h1 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.tts-portal .sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+
+.tts-portal label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.tts-portal input,
+.tts-portal textarea,
+.tts-portal select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+
+.tts-portal input:focus,
+.tts-portal textarea:focus,
+.tts-portal select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(25, 94, 61, 0.15);
+}
+
+.tts-portal textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.tts-portal .field {
+  margin-bottom: 16px;
+}
+
+.tts-portal button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tts-portal button:hover {
+  background: var(--accent-dark);
+}
+
+.tts-portal button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.tts-portal button.secondary {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.tts-portal button.secondary:hover {
+  background: #f3f4f3;
+}
+
+.tts-portal .row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tts-portal #generateBtn {
+  margin-top: 10px;
+}
+
+.tts-portal .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tts-portal .topbar .who {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.tts-portal .logout {
+  font-size: 13px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.tts-portal .logout:hover {
+  color: var(--text);
+  background: none;
+}
+
+.tts-portal .error {
+  color: var(--error);
+  font-size: 14px;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.tts-portal .result {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.tts-portal audio {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.tts-portal .hidden {
+  display: none;
+}
+
+.tts-portal .spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: tts-spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes tts-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tts-portal a.download {
+  display: inline-block;
+  text-decoration: none;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tts-portal a.download:hover {
+  background: #f3f4f3;
+}

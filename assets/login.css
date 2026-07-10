@@ -1,0 +1,267 @@
+/* TTS Portal — WordPress login (matches portal card UI) */
+
+:root {
+  --accent: #195E3D;
+  --accent-dark: #144a31;
+  --bg: #f5f6f5;
+  --card: #ffffff;
+  --text: #1a1d1b;
+  --muted: #6b726e;
+  --border: #e2e5e3;
+  --error: #c0392b;
+}
+
+body.login {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg) !important;
+  color: var(--text);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh;
+  height: 100%;
+  padding: 40px 16px;
+  box-sizing: border-box;
+}
+
+body.login #login {
+  width: 500px !important;
+  max-width: 100%;
+  padding: 0;
+  margin: 0 !important;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Telavox logo — above the form card */
+body.login #login h1 {
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+body.login #login h1 a {
+  background-image: url("telavox-logo.svg") !important;
+  background-size: contain !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  width: 200px !important;
+  height: 36px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-indent: -9999px;
+  overflow: hidden;
+  display: block;
+}
+
+/* Form card */
+body.login #login form,
+body.login #login #loginform,
+body.login #login #lostpasswordform,
+body.login #login #registerform {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  padding: 28px;
+  margin-top: 0;
+}
+
+/* Title + subtitle inside the form card */
+body.login .tts-login-heading {
+  margin: 0 0 22px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.login .tts-login-heading h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.3;
+  padding: 0;
+}
+
+body.login .tts-login-heading .sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+body.login #login label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+
+body.login #login .user-pass-wrap {
+  margin-top: 16px;
+}
+
+body.login #login .user-pass-wrap label,
+body.login #login label[for="user_pass"],
+body.login #login label[for="user_login"],
+body.login #login label[for="user_email"] {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+body.login #login input[type="text"],
+body.login #login input[type="email"],
+body.login #login input[type="password"],
+body.login #login input.input {
+  width: 100% !important;
+  padding: 10px 12px !important;
+  font-size: 15px !important;
+  font-family: inherit;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+  margin: 0 0 16px !important;
+  min-height: 0 !important;
+}
+
+body.login #login input[type="text"]:focus,
+body.login #login input[type="email"]:focus,
+body.login #login input[type="password"]:focus,
+body.login #login input.input:focus {
+  outline: none !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(25, 94, 61, 0.15) !important;
+}
+
+body.login #login .wp-pwd {
+  margin-bottom: 16px;
+}
+
+body.login #login .wp-pwd input {
+  margin-bottom: 0 !important;
+}
+
+body.login #login .button.wp-hide-pw {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+}
+
+body.login #login .forgetmenot {
+  margin: 0 0 16px;
+  float: none;
+}
+
+body.login #login .forgetmenot label {
+  display: inline;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+body.login #login input[type="checkbox"] {
+  border-radius: 4px;
+  border-color: var(--border);
+}
+
+body.login #login .submit {
+  margin: 10px 0 0;
+  padding: 0;
+  float: none;
+}
+
+body.login #login .submit .button,
+body.login #login .submit .button-primary,
+body.login #login #wp-submit {
+  float: none !important;
+  width: auto;
+  display: inline-block;
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 11px 18px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  height: auto !important;
+  line-height: 1.3 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  margin: 10px 0 0 !important;
+}
+
+body.login #login .submit .button:hover,
+body.login #login .submit .button-primary:hover,
+body.login #login #wp-submit:hover {
+  background: var(--accent-dark) !important;
+}
+
+body.login #login #nav,
+body.login #login #backtoblog {
+  margin: 16px 0 0;
+  padding: 0;
+  text-align: left;
+  font-size: 14px;
+}
+
+body.login #login #backtoblog {
+  display: none;
+}
+
+body.login #login #nav a,
+body.login #login #backtoblog a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+body.login #login #nav a:hover,
+body.login #login #backtoblog a:hover {
+  color: var(--text);
+}
+
+body.login #login .message,
+body.login #login #login_error,
+body.login #login .success {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: none;
+  background: var(--card);
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+
+body.login #login #login_error {
+  border-left: 3px solid var(--error);
+  color: var(--error);
+}
+
+body.login #login .message {
+  border-left: 3px solid var(--accent);
+  color: var(--text);
+}
+
+body.login #login .privacy-policy-page-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+body.login #login .privacy-policy-page-link a {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Hide language switcher clutter if present */
+body.login .language-switcher {
+  margin-top: 20px;
+}

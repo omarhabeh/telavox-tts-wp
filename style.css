@@ -252,7 +252,7 @@ body.tts-portal {
   color: var(--btn-text);
   border: 1px solid var(--border);
   border-radius: 300px;
-  padding: 16px 32px;
+  padding: 8px 32px;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;

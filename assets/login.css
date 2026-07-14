@@ -74,33 +74,6 @@ body.login #login #registerform {
   margin-top: 0;
 }
 
-/* Title + subtitle inside the form card */
-body.login .tts-login-heading {
-  margin: 0 0 22px;
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-body.login .tts-login-heading h2 {
-  font-family: var(--font-title);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text);
-  margin: 0 0 4px;
-  line-height: 1.3;
-  padding: 0;
-}
-
-body.login .tts-login-heading .sub {
-  font-size: 14px;
-  color: var(--muted);
-  margin: 0;
-  line-height: 1.4;
-}
-
 body.login #login label {
   display: block;
   font-size: 13px;

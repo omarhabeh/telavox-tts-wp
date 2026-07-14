@@ -20,7 +20,6 @@
 	<div id="appView" class="card">
 		<div class="topbar">
 			<div>
-				<h1>Telavox Text to speech</h1>
 				<span class="who" id="whoami"></span>
 			</div>
 			<a class="logout" id="logoutBtn" href="#">Log out</a>

@@ -237,15 +237,7 @@ function tts_portal_login_enqueue() {
 		'tts-portal-login',
 		get_template_directory_uri() . '/assets/login.css',
 		array( 'tts-portal-fonts' ),
-		'1.0.9'
-	);
-
-	wp_enqueue_script(
-		'tts-portal-login',
-		get_template_directory_uri() . '/assets/login.js',
-		array(),
-		'1.0.9',
-		true
+		'1.0.10'
 	);
 }
 add_action( 'login_enqueue_scripts', 'tts_portal_login_enqueue' );
@@ -266,27 +258,12 @@ function tts_portal_login_logo_title() {
 add_filter( 'login_headertext', 'tts_portal_login_logo_title' );
 
 /**
- * Portal-style heading at the top of the login form card.
+ * Relabel the login username field to Email Address.
  */
-function tts_portal_login_message( $message ) {
-	global $action;
-
-	$title = 'Telavox TTS Portal';
-	$sub   = 'Log in to continue.';
-
-	if ( 'lostpassword' === $action ) {
-		$title = 'Reset password';
-		$sub   = 'Enter your email or username to get a reset link.';
-	} elseif ( in_array( $action, array( 'rp', 'resetpass' ), true ) ) {
-		$title = 'Set new password';
-		$sub   = 'Choose a new password for your account.';
+function tts_portal_login_email_label( $translation, $text, $domain ) {
+	if ( 'default' === $domain && 'Username or Email Address' === $text ) {
+		return 'Email Address';
 	}
-
-	$heading  = '<div class="tts-login-heading">';
-	$heading .= '<h2>' . esc_html( $title ) . '</h2>';
-	$heading .= '<p class="sub">' . esc_html( $sub ) . '</p>';
-	$heading .= '</div>';
-
-	return $heading . $message;
+	return $translation;
 }
-add_filter( 'login_message', 'tts_portal_login_message' );
+add_filter( 'gettext', 'tts_portal_login_email_label', 10, 3 );

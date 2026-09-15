@@ -70,7 +70,7 @@ function tts_portal_enqueue_assets() {
 		'tts-portal',
 		get_template_directory_uri() . '/assets/portal.js',
 		array(),
-		'1.0.1',
+		'1.0.2',
 		true
 	);
 

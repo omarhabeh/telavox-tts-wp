@@ -57,6 +57,7 @@
   async function generate() {
     var text = $("text").value.trim();
     var voiceId = $("voice").value;
+    var language = $("language").value;
     showError("");
     if (!text) {
       showError("Type some text first.");
@@ -70,7 +71,7 @@
       var res = await api("tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: text, voiceId: voiceId }),
+        body: JSON.stringify({ text: text, voiceId: voiceId, language: language }),
       });
       if (res.status === 401) {
         window.location.href = "/wp-login.php?redirect_to=" + encodeURIComponent(window.location.href);

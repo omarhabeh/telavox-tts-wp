@@ -10,11 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Call ElevenLabs and return MP3 audio bytes.
  *
- * @param string $text    Text to synthesize.
- * @param string $voice_id ElevenLabs voice ID.
+ * @param string $text          Text to synthesize.
+ * @param string $voice_id      ElevenLabs voice ID.
+ * @param string $language_code ISO 639-1 code to enforce language and text normalization.
  * @return string|WP_Error Raw MP3 bytes, or WP_Error on failure.
  */
-function tts_portal_synthesize( $text, $voice_id ) {
+function tts_portal_synthesize( $text, $voice_id, $language_code ) {
 	$api_key = tts_portal_get_api_key();
 	if ( ! $api_key ) {
 		return new WP_Error( 'missing_key', 'ElevenLabs API key is not configured. Set it under Settings → TTS Portal.' );
@@ -36,6 +37,7 @@ function tts_portal_synthesize( $text, $voice_id ) {
 				array(
 					'text'           => $text,
 					'model_id'       => tts_portal_get_model_id(),
+					'language_code'  => $language_code,
 					'voice_settings' => tts_portal_get_voice_settings(),
 				)
 			),

@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TTS_PORTAL_DB_VERSION', '1.1' );
+define( 'TTS_PORTAL_DB_VERSION', '1.2' );
 
 /**
  * Full table name with WP prefix.
@@ -35,6 +35,7 @@ function tts_portal_install_requests_table() {
 		display_name varchar(250) NOT NULL DEFAULT '',
 		voice_id varchar(100) NOT NULL DEFAULT '',
 		voice_label varchar(200) NOT NULL DEFAULT '',
+		language_code varchar(10) NULL,
 		text_content longtext NOT NULL,
 		char_count int(11) NOT NULL DEFAULT 0,
 		status varchar(20) NOT NULL DEFAULT 'success',
@@ -149,6 +150,7 @@ function tts_portal_audio_url( $audio_file ) {
  * @param array $args {
  *   @type string $text
  *   @type string $voice_id
+ *   @type string $language_code
  *   @type string $status        success|error
  *   @type string $error_message
  *   @type string $audio_file    Relative path under uploads
@@ -171,6 +173,7 @@ function tts_portal_log_request( $args ) {
 			'display_name'  => $user->display_name ? $user->display_name : '',
 			'voice_id'      => $voice_id,
 			'voice_label'   => tts_portal_voice_label( $voice_id ),
+			'language_code' => isset( $args['language_code'] ) ? (string) $args['language_code'] : '',
 			'text_content'  => $text,
 			'char_count'    => mb_strlen( $text ),
 			'status'        => isset( $args['status'] ) ? sanitize_key( $args['status'] ) : 'success',
@@ -180,7 +183,7 @@ function tts_portal_log_request( $args ) {
 			'user_agent'    => isset( $_SERVER['HTTP_USER_AGENT'] ) ? substr( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ), 0, 500 ) : '',
 			'created_at'    => current_time( 'mysql' ),
 		),
-		array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
+		array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
 	);
 
 	if ( ! $inserted ) {
@@ -244,7 +247,7 @@ function tts_portal_render_requests_page() {
 	$total = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	$rows  = $wpdb->get_results(
 		$wpdb->prepare(
-			"SELECT id, user_email, display_name, voice_label, voice_id, text_content, char_count, status, audio_file, created_at
+			"SELECT id, user_email, display_name, voice_label, voice_id, language_code, text_content, char_count, status, audio_file, created_at
 			FROM {$table}
 			ORDER BY created_at DESC, id DESC
 			LIMIT %d OFFSET %d",
@@ -265,6 +268,7 @@ function tts_portal_render_requests_page() {
 					<th scope="col" style="width:4%">ID</th>
 					<th scope="col" style="width:14%">Email</th>
 					<th scope="col" style="width:10%">Voice</th>
+					<th scope="col" style="width:8%">Language</th>
 					<th scope="col">Text</th>
 					<th scope="col" style="width:5%">Chars</th>
 					<th scope="col" style="width:7%">Status</th>
@@ -276,7 +280,7 @@ function tts_portal_render_requests_page() {
 			<tbody>
 				<?php if ( empty( $rows ) ) : ?>
 					<tr>
-						<td colspan="9">No requests logged yet.</td>
+						<td colspan="10">No requests logged yet.</td>
 					</tr>
 				<?php else : ?>
 					<?php foreach ( $rows as $row ) : ?>
@@ -289,6 +293,13 @@ function tts_portal_render_requests_page() {
 								<?php endif; ?>
 							</td>
 							<td><?php echo esc_html( $row->voice_label ? $row->voice_label : $row->voice_id ); ?></td>
+							<td>
+								<?php if ( $row->language_code ) : ?>
+									<?php echo esc_html( tts_portal_language_label( $row->language_code ) ); ?>
+								<?php else : ?>
+									<span class="description">—</span>
+								<?php endif; ?>
+							</td>
 							<td><?php echo esc_html( tts_portal_truncate( $row->text_content, 100 ) ); ?></td>
 							<td><?php echo esc_html( (string) $row->char_count ); ?></td>
 							<td>
@@ -403,6 +414,17 @@ function tts_portal_render_request_detail( $id ) {
 					<td>
 						<?php echo esc_html( $row->voice_label ); ?>
 						<code><?php echo esc_html( $row->voice_id ); ?></code>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Language</th>
+					<td>
+						<?php if ( $row->language_code ) : ?>
+							<?php echo esc_html( tts_portal_language_label( $row->language_code ) ); ?>
+							<code><?php echo esc_html( $row->language_code ); ?></code>
+						<?php else : ?>
+							<span class="description">—</span>
+						<?php endif; ?>
 					</td>
 				</tr>
 				<tr>

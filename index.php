@@ -31,6 +31,15 @@
 		</div>
 
 		<div class="field">
+			<label for="language">Language</label>
+			<select id="language">
+				<?php foreach ( tts_portal_get_languages() as $code => $label ) : ?>
+					<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $code, tts_portal_get_default_language() ); ?>><?php echo esc_html( $label ); ?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+
+		<div class="field">
 			<label for="text">Text</label>
 			<textarea id="text" placeholder="Type the text to be read aloud..."></textarea>
 		</div>

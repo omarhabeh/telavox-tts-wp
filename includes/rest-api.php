@@ -48,12 +48,19 @@ function tts_portal_rest_voices() {
 function tts_portal_rest_tts( WP_REST_Request $request ) {
 	$text     = trim( (string) $request->get_param( 'text' ) );
 	$voice_id = (string) $request->get_param( 'voiceId' );
+	$language = (string) $request->get_param( 'language' );
+	if ( '' === $language ) {
+		$language = tts_portal_get_default_language();
+	}
 
 	if ( '' === $text ) {
 		return new WP_Error( 'missing_text', 'Text is missing', array( 'status' => 400 ) );
 	}
 	if ( '' === $voice_id ) {
 		return new WP_Error( 'missing_voice', 'No voice selected', array( 'status' => 400 ) );
+	}
+	if ( ! array_key_exists( $language, tts_portal_get_languages() ) ) {
+		return new WP_Error( 'unknown_language', 'Unknown language', array( 'status' => 400 ) );
 	}
 
 	$known = false;
@@ -67,12 +74,13 @@ function tts_portal_rest_tts( WP_REST_Request $request ) {
 		return new WP_Error( 'unknown_voice', 'Unknown voice', array( 'status' => 400 ) );
 	}
 
-	$audio = tts_portal_synthesize( $text, $voice_id );
+	$audio = tts_portal_synthesize( $text, $voice_id, $language );
 	if ( is_wp_error( $audio ) ) {
 		tts_portal_log_request(
 			array(
 				'text'          => $text,
 				'voice_id'      => $voice_id,
+				'language_code' => $language,
 				'status'        => 'error',
 				'error_message' => $audio->get_error_message(),
 			)
@@ -94,10 +102,11 @@ function tts_portal_rest_tts( WP_REST_Request $request ) {
 
 	tts_portal_log_request(
 		array(
-			'text'       => $text,
-			'voice_id'   => $voice_id,
-			'status'     => 'success',
-			'audio_file' => $audio_file,
+			'text'          => $text,
+			'voice_id'      => $voice_id,
+			'language_code' => $language,
+			'status'        => 'success',
+			'audio_file'    => $audio_file,
 		)
 	);
 
